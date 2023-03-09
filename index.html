@@ -14,13 +14,14 @@
     <h2>What genre are you in the mood for?</h2>
     <form action="" name="genreForm" id="genreForm">
       <label for="genre" class="sr-only">Select a genre from the list</label>
-      <select name="genre" id="genre">
+      <select name="genre" id="genreListContainer" class="genreListContainer">
         <option>Choose one</option>
       </select>
     </form>
   </header>
-  <main>
-
+  <main class="mainSection">
+    <!-- Fetched data goes in here -->
+    <ul id="movieCardsContainer" class="movieCardsContainer"></ul>
   </main>
 </body>
 
