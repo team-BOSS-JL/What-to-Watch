@@ -5,11 +5,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>What to Watch</title>
 </head>
 
 <body>
-
+  <header>
+    <h1>What To Watch</h1>
+    <h2>What genre are you in the mood for?</h2>
+    <form action="" name="genreForm" id="genreForm">
+      <label for="genre" class="sr-only">Select a genre from the list</label>
+      <select name="genre" id="genreListContainer" class="genreListContainer">
+        <option>Choose one</option>
+      </select>
+    </form>
+  </header>
+  <main class="mainSection">
+    <!-- Fetched data goes in here -->
+    <ul id="movieCardsContainer" class="movieCardsContainer"></ul>
+  </main>
 </body>
 
 </html>
