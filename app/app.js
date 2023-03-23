@@ -39,10 +39,54 @@ const movieApp = {
       .catch((error) => console.error(error));
   },
 
-  // Define an init function to set up the app and bind event listeners
+  // Define a function to handle the change event on the genre select dropdown and fetch movies based on the selected genre
+  // This function adds a change event listener to the genre select dropdown menu.
+  addGenreChangeListener() {
+    // When the user changes the selected genre, the function inside the arrow function will be executed.
+    this.genreSelect.addEventListener("change", () => {
+      // Gets the value of the selected genre.
+      const genreId = this.genreSelect.value;
+      // Constructs a URL to fetch movies based on the selected genre.
+      const url = `${this.movieUrl}?api_key=${this.apiKey}&language=en-US&with_genres=${genreId}`;
+      // Fetches the movies based on the constructed URL.
+      this.fetchMovies(url);
+    });
+  },
+
+  // Define a function to fetch movies from a given URL and render them in the movies grid
+  // The fetchMovies function takes a URL as its argument and uses the fetch API to make a GET request to that URL
+  fetchMovies(url) {
+    fetch(url)
+      // Once the response is returned, we parse the response body as JSON
+      .then((response) => response.json())
+      // The data now contains the JSON data we requested. We extract the movies from the data and store them in a variable
+      .then((data) => {
+        const movies = data.results;
+        let moviesHtml = "";
+        // We use the forEach method to iterate over each movie in the movies array
+        movies.forEach((movie) => {
+          // For each movie, we create a string of HTML markup using template literals and append it to the moviesHtml variable
+          moviesHtml += `
+          <li class="movieCard">
+            <img src="https://image.tmdb.org/t/p/w500${
+              movie.poster_path
+            }" alt="${movie.title} poster">
+            <h3>${movie.title} (${movie.release_date.substring(0, 4)})</h3>
+            <p>${movie.overview}</p>
+            <p>Rating: ${movie.vote_average}/10</p>
+          </li>
+        `;
+        });
+        // We set the innerHTML property of the moviesGrid element to the moviesHtml string, which renders the movies on the page
+        this.moviesGrid.innerHTML = moviesHtml;
+      })
+      // If there is an error during any part of this process, we log the error to the console
+      .catch((error) => console.error(error));
+  },
+
   init() {
-    // Call the fetchGenres() and addGenreChangeListener() methods
     this.fetchGenres();
+    this.addGenreChangeListener();
   },
 };
 
