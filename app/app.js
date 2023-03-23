@@ -84,7 +84,9 @@ const movieApp = {
       .catch((error) => console.error(error));
   },
 
+  // Define an init function to set up the app and bind event listeners
   init() {
+    // Call the fetchGenres() and addGenreChangeListener() methods
     this.fetchGenres();
     this.addGenreChangeListener();
   },
