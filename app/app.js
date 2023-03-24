@@ -15,6 +15,11 @@ const movieApp = {
   // This variable is used to store a reference to the <ul> element with an ID of "moviesGrid" in the HTML document.
   moviesGrid: document.getElementById("moviesGrid"),
 
+  // These variables are used to store references to the <button> elements with IDs of "popularBtn", "topRatedBtn", and "upcomingBtn" in the HTML document.
+  popularBtn: document.getElementById("popularBtn"),
+  topRatedBtn: document.getElementById("topRatedBtn"),
+  upcomingBtn: document.getElementById("upcomingBtn"),
+
   // Define a function to fetch the movie genres and add them to the genre select dropdown
   // This function fetches a list of movie genres from an API using the provided URL and API key.
   fetchGenres() {
@@ -86,6 +91,29 @@ const movieApp = {
 
   // Define an init function to set up the app and bind event listeners
   init() {
+    // Set up an event listener for when the user clicks the popular button
+    this.popularBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`; // Construct a URL for popular movies
+      this.fetchMovies(url); // Call the fetchMovies() method with the URL
+
+      // Set up an event listener for when the user clicks the top rated button
+      this.topRatedBtn.addEventListener("click", () => {
+        const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
+        this.fetchMovies(url); // Call the fetchMovies() method with the URL
+
+        // Set up an event listener for when the user clicks the upcoming button
+        this.upcomingBtn.addEventListener("click", () => {
+          const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
+          this.fetchMovies(url); // Call the fetchMovies() method with the URL
+
+          // Call the fetchMovies() method with the default movieUrl URL
+          this.fetchMovies(
+            `${this.movieUrl}?api_key=${this.apiKey}&language=en-US`
+          );
+        });
+      });
+    });
+
     // Call the fetchGenres() and addGenreChangeListener() methods
     this.fetchGenres();
     this.addGenreChangeListener();
