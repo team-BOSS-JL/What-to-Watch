@@ -95,24 +95,22 @@ const movieApp = {
     this.popularBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`; // Construct a URL for popular movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-
-      // Set up an event listener for when the user clicks the top rated button
-      this.topRatedBtn.addEventListener("click", () => {
-        const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
-        this.fetchMovies(url); // Call the fetchMovies() method with the URL
-
-        // Set up an event listener for when the user clicks the upcoming button
-        this.upcomingBtn.addEventListener("click", () => {
-          const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
-          this.fetchMovies(url); // Call the fetchMovies() method with the URL
-
-          // Call the fetchMovies() method with the default movieUrl URL
-          this.fetchMovies(
-            `${this.movieUrl}?api_key=${this.apiKey}&language=en-US`
-          );
-        });
-      });
     });
+
+    // Set up an event listener for when the user clicks the top rated button
+    this.topRatedBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
+      this.fetchMovies(url); // Call the fetchMovies() method with the URL
+    });
+
+    // Set up an event listener for when the user clicks the upcoming button
+    this.upcomingBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
+      this.fetchMovies(url); // Call the fetchMovies() method with the URL
+    });
+
+    // // Call the fetchMovies() method with the default movieUrl URL
+    this.fetchMovies(`${this.movieUrl}?api_key=${this.apiKey}&language=en-US`);
 
     // Call the fetchGenres() and addGenreChangeListener() methods
     this.fetchGenres();
