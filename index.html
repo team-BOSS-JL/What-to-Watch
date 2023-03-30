@@ -5,21 +5,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles.css">
-  <title>What To Watch</title>
+  <link rel="stylesheet" href="./styles/styles.css">
+  <title>Movie App</title>
 </head>
 
 <body>
 
   <header class="mainHeader">
-
-    <h1>What To Watch</h1>
+    <h1>What to Watch</h1>
 
     <div class="buttonsContainer">
       <button id="topRatedBtn" value="Top Rated" class="headerBtn">Top Rated</button>
       <button id="popularBtn" value="Popular" class="headerBtn">Popular</button>
       <button id="upcomingBtn" value="Upcoming" class="headerBtn">Upcoming</button>
     </div>
+
+    <form action="#" method="GET" class="searchForm">
+      <label for="searchInput" class="sr-only">Enter a movie name:</label>
+      <input type="text" id="searchInput" name="searchInput" class="searchInput" placeholder="Enter a movie name...">
+      <button type="submit" id="searchBtn" class="searchBtn"><i class="fas fa-search"></i></button>
+    </form>
 
     <h2>What genre are you in the mood for?</h2>
 
@@ -31,11 +36,9 @@
         <option>Select a genre</option>
       </select>
     </form>
-
   </header>
 
   <main id="mainContent" class="mainContent">
-
     <section class="wrapper">
       <ul id="moviesGrid" class="moviesGrid"></ul>
     </section>
@@ -45,7 +48,6 @@
     </button>
 
   </main>
-
   <!-- JavaScript files -->
   <script src="https://kit.fontawesome.com/6d588fc2f3.js" crossorigin="anonymous"></script>
   <script src="./app/app.js"></script>
