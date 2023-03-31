@@ -1,0 +1,43 @@
+.mainHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  background-color: $tertiary;
+  color: $primary;
+  padding: 13rem 0;
+}
+
+.mainHeader h1 {
+  margin-bottom: 1rem;
+}
+
+.mainHeader h2 {
+  margin-bottom: 0.5rem;
+}
+
+.buttonsContainer {
+  margin: 1.5rem 0;
+}
+
+/* Code courtesy of @ke1221 (some modification by Team JL)*/
+
+.headerBtn {
+  color: $secondary;
+  margin-right: 1rem;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: $quinary;
+  border: 1px solid $quinary;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px $senary, -6px -6px 12px $solidwhite;
+}
+
+.headerBtn:active {
+  color: $quaternary;
+  box-shadow: inset 4px 4px 12px $senary, inset -4px -4px 12px $solidwhite;
+}
+
+/* End Code courtesy of @ke1221 some modification by me */

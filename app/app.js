@@ -9,6 +9,9 @@ const movieApp = {
   // This variable stores the URL of the API endpoint that returns a list of movies.
   movieUrl: "https://api.themoviedb.org/3/discover/movie",
 
+  // This variable stores the URL of the API endpoint that returns a list of movies.
+  movieUrl: "https://api.themoviedb.org/3/discover/movie",
+
   // This variable is used to store a reference to the <select> element with an ID of "genreSelect" in the HTML document.
   genreSelect: document.getElementById("genreSelect"),
 
@@ -19,6 +22,80 @@ const movieApp = {
   popularBtn: document.getElementById("popularBtn"),
   topRatedBtn: document.getElementById("topRatedBtn"),
   upcomingBtn: document.getElementById("upcomingBtn"),
+
+  // This variable is used to store a reference to the <form> element with a class of "searchForm" in the HTML document.
+  searchForm: document.querySelector(".searchForm"),
+
+  // This variable is used to store a reference to the <input> element with a class of "searchInput" in the HTML document.
+  searchInput: document.querySelector(".searchInput"),
+
+  // This method searches for movies by calling an external API with the provided search term
+  // It also defines a displayMovies() method that takes a list of movies and generates HTML to display them on the page
+  searchMovies(searchTerm) {
+    // Check if search term is empty
+    if (!searchTerm) {
+      // Display message if search term is empty
+      this.moviesGrid.innerHTML =
+        "The search is empty, please type a movie name to be searched.";
+      return;
+    }
+
+    // // Check if search term contains any characters other than letters or numbers
+    if (!searchTerm.match(/^[a-zA-Z0-9]+$/)) {
+      // Display message if search term contains characters other than letters or numbers
+      this.moviesGrid.innerHTML = "Please enter letters or numbers only.";
+      return;
+    }
+
+    // Construct URL for API call using provided API key and search term
+    const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${searchTerm}`;
+
+    // Make API call using fetch() function and return a promise
+    fetch(apiUrl)
+      .then((response) => {
+        // Throw error if response is not ok
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        // Convert response to JSON and return as a promise
+        return response.json();
+      })
+      .then((data) => {
+        // Extract list of movies from returned data and pass to displayMovies() method for rendering
+        const movies = data.results;
+        this.displayMovies(movies);
+      })
+      .catch((error) => {
+        // Display error message if promise is rejected
+        console.error("Error fetching search results:", error);
+        this.moviesGrid.innerHTML = "Error fetching search results.";
+      });
+  },
+
+  // Generate HTML code for each movie returned by the API and concatenate them into a single string
+  // This function takes an array of movie objects and displays them on the page in a specific format
+  displayMovies(movies) {
+    // Initialize an empty string variable to store the HTML templates for each movie
+    let moviesHtml = "";
+
+    //   // Iterate over each movie object in the array using a forEach loop
+    movies.forEach((movie) => {
+      //     // Use template literals to create an HTML template for each movie with its details
+      moviesHtml += `
+      <li class="movieCard">
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+        movie.title
+      } poster">
+        <h3>${movie.title} (${movie.release_date.substring(0, 4)})</h3>
+        <p>${movie.overview}</p>
+        <p>Rating: ${movie.vote_average}/10</p>
+      </li>
+    `;
+    });
+
+    //   // Assign the generated HTML to the innerHTML property of a moviesGrid element to display the movies on the page
+    this.moviesGrid.innerHTML = moviesHtml;
+  },
 
   // Define a function to fetch the movie genres and add them to the genre select dropdown
   // This function fetches a list of movie genres from an API using the provided URL and API key.
@@ -89,8 +166,46 @@ const movieApp = {
       .catch((error) => console.error(error));
   },
 
+  // Define a function to handle scrolling and display a "go to top" button
+  // This function is responsible for showing and hiding a "go to top" button based on the user's scroll position on the page.
+  scrollFunction() {
+    //   // Get the button element with the ID "goTopBtn" from the DOM.
+    const goTopBtn = document.getElementById("goTopBtn");
+
+    //   // Check if the user has scrolled down more than 20 pixels using three different methods.
+    if (
+      window.scrollY > 20 || // Check scroll position on window object
+      document.body.scrollTop > 20 || // Check scroll position on body element
+      document.documentElement.scrollTop > 20 // Check scroll position on root element (HTML)
+    ) {
+      // If the user has scrolled down more than 20 pixels, display the "go to top" button by setting its CSS display property to "block".
+      goTopBtn.style.display = "block";
+    } else {
+      //     // Otherwise, hide the "go to top" button by setting its display property to "none".
+      goTopBtn.style.display = "none";
+    }
+
+    //   // Add an event listener to the button so that when it is clicked, the window will scroll smoothly to the top of the page.
+    goTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  },
+
   // Define an init function to set up the app and bind event listeners
   init() {
+    // // Set up an event listener for when the user submits a search form
+    this.searchForm.addEventListener("submit", (event) => {
+      event.preventDefault(); // Prevent the default behavior of submitting a form
+      const searchTerm = this.searchInput.value; // Get the value of the search input
+      if (searchTerm) {
+        //     // If the search term is not empty
+        this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
+      }
+    });
+
     // Set up an event listener for when the user clicks the popular button
     this.popularBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`; // Construct a URL for popular movies
@@ -109,12 +224,21 @@ const movieApp = {
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
 
+    // Fetch trending movies and render them on page load
+    const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${this.apiKey}&language=en-US`;
+    this.fetchMovies(trendingUrl);
+
     // // Call the fetchMovies() method with the default movieUrl URL
     this.fetchMovies(`${this.movieUrl}?api_key=${this.apiKey}&language=en-US`);
 
     // Call the fetchGenres() and addGenreChangeListener() methods
     this.fetchGenres();
     this.addGenreChangeListener();
+
+    // // Set up an event listener for when the user scrolls
+    window.addEventListener("scroll", () => {
+      this.scrollFunction(); // Call the scrollFunction() method
+    });
   },
 };
 
