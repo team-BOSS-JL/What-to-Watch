@@ -4,11 +4,11 @@
 
 Table of Contents
 
-  • Features
-  • Technologies
-  • Installation
-  • Usage
-  • Contributing
+  Features
+  Technologies
+  Installation
+  Usage
+  Contributing
 
  ► Features
 
