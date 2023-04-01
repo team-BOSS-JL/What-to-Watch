@@ -1,52 +1,51 @@
-                                             What to Watch
+                                                  What to Watch
 
   This project is a web app that allows users to browse a collection of movies and search for a specific movie. The data is retrieved from The Movie Database API.
 
 Table of Contents
 
-    Features
-    Technologies
-    Installation
-    Usage
-    Contributing
-    License
+  • Features
+  • Technologies
+  • Installation
+  • Usage
+  • Contributing
 
-Features
+ ► Features
 
    1. Browse a collection of movies
    2. Search for a specific movie by name
    3. Filter movies by popularity, top rated, and upcoming
    4. Select a genre to see a list of movies in that genre
 
-Technologies
+► Technologies
 
 This project was created with:
 
-   -JavaScript
-   -HTML
-   -CSS
+  ► JavaScript
+  ► HTML
+  ► CSS
 
-Installation
+► Installation
 
 To run this project locally, follow these steps:
 
  1. Create a folder where you would like the repository to be cloned in by running the following command:
  
-    -mkdir << NAME YOUR FOLDER >>
+    → mkdir << NAME YOUR FOLDER >>
     
  2. Navigate into the project directory by running the following command: 
  
-    -cd << NAME OF THE FOLDER YOU JUST CREATED >>
+    → cd << NAME OF THE FOLDER YOU JUST CREATED >>
  
  3. Clone this repository by running the following command:
 
-    -git clone << THE REPOSITORY URL >>
+    → git clone << THE REPOSITORY URL >>
 
  4. Open the folder into your editor (vsCode) by running the following command:
     
-    -code .
+    → code .
 
-Usage
+► Usage
 
    1. Open the index.html file in your web browser.
    2. Use the search bar to search for a movie by name.
@@ -54,7 +53,7 @@ Usage
    4. Use the genre dropdown to select a genre and view a list of movies in that genre.
    
 
-Contributing
+► Contributing
 
 Contributions are always welcome! Please follow these steps:
 
@@ -64,8 +63,10 @@ Contributions are always welcome! Please follow these steps:
    4. Push to the branch: git push origin my-new-branch
    5. Submit a pull request.
    
-   Thank you for taking the time to read this README and for your interest in this project. Your feedback and suggestions are greatly appreciated! 
+   
+Thank you for taking the time to read this README and for your interest in this project. Your feedback and suggestions are greatly appreciated! 
+   
 
 Sencirely, 
 
- J&L Team.
+ J&L Team ♥.
