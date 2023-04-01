@@ -1,4 +1,4 @@
-                                               What to Watch
+                                                 What to Watch
 
   This project is a web app that allows users to browse a collection of movies and search for a specific movie. The data is retrieved from The Movie Database API.
 
