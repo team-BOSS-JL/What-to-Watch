@@ -48,21 +48,21 @@ To run this project locally, follow these steps:
 
 ► Usage
 
-   1. Open the index.html file in your web browser.
-   2. Use the search bar to search for a movie by name.
-   3. Use the filter buttons to view movies by popularity, top rated, and upcoming.
-   4. Use the genre dropdown to select a genre and view a list of movies in that genre.
+    1. Open the index.html file in your web browser.
+    2. Use the search bar to search for a movie by name.
+    3. Use the filter buttons to view movies by popularity, top rated, and upcoming.
+    4. Use the genre dropdown to select a genre and view a list of movies in that genre.
    
 
 ► Contributing
 
 Contributions are always welcome! Please follow these steps:
 
-   1. Fork this repository.
-   2. Create a new branch: git checkout -b my-new-branch
-   3. Make your changes and commit them: git commit -m "Add some feature"
-   4. Push to the branch: git push origin my-new-branch
-   5. Submit a pull request.
+    1. Fork this repository.
+    2. Create a new branch: git checkout -b my-new-branch
+    3. Make your changes and commit them: git commit -m "Add some feature"
+    4. Push to the branch: git push origin my-new-branch
+    5. Submit a pull request.
    
    
 Thank you for taking the time to read this README and for your interest in this project. Your feedback and suggestions are greatly appreciated! 
