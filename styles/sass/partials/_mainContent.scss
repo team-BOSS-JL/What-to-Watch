@@ -1,5 +1,5 @@
 .mainContent {
-  background-color: #364b59da;
+  background-color: $secondary;
   padding: 2rem 0;
 }
 
@@ -13,12 +13,11 @@
 }
 
 .movieCard {
-  background-color: #fff;
+  background-color: $solidwhite;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   padding: 1rem;
   transition: transform 0.3s ease-in-out;
-  // cursor: pointer;
 }
 
 .movieCard:hover {
