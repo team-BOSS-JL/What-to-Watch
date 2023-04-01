@@ -69,4 +69,4 @@ Thank you for taking the time to read this README and for your interest in this 
 
 Sencirely, 
 
- J&L Team ♥.
+ J&L Team ♥.  
