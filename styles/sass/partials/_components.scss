@@ -1,0 +1,15 @@
+.goTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px 30px;
+  background-color: $quaternary;
+  border: none;
+  border-radius: 80px 0 0 0;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $octonary;
+  }
+}

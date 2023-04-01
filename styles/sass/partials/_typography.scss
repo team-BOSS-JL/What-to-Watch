@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "Jakarta Sans";
+  src: url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Regular.woff), url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Regular.woff2), url(../fonts/PlusJakarta_Sans-2.5/static/PlusJakartaSans-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Jakarta Sans";
+  src: url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Bold.woff), url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Bold.woff2), url(../fonts/PlusJakarta_Sans-2.5/static/PlusJakartaSans-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Young Serif";
+  src: url(../fonts/youngserif/YoungSerif-Regular.otf);
+}
+
+// ==== Global Typography ====
+html {
+  font-size: 125%;
+}
+
+body {
+  font-family: $secondaryFont;
+  font-size: $baseFontSize;
+  color: $primary;
+}
+
+h1 {
+  color: $secondary;
+  font-family: $primaryFont;
+  @include fontSize (68);
+
+}
+
+h2 {
+  @include fontSize (22);
+}
+
+// ==== Header Typography ====
+.mainHeader {
+
+  & p {
+    @include fontSize (18);
+  }
+}
+
+.headerSpan {
+  color: $quaternary;
+  font-weight: 500;
+}
+
+// ==== Form Typography ====
+.genreSelect {
+  font-size: 16px;
+  color: $primary;
+  text-align: center;
+  letter-spacing: .1rem;
+  transition: .4s ease-in-out;
+
+  &.genreSelect:hover {
+    letter-spacing: .2rem;
+    color: $quaternary;
+  }
+}
+
+.genreSelect>option {
+  color: $septenary;
+  font-family: $secondaryFont;
+  font-weight: 500;
+  font-style: italic;
+  @include fontSize (18);
+}
+
+// ==== Go Top Button Typography ====
+.goTopBtn {
+  color: $solidwhite;
+  font-weight: bold;
+  cursor: pointer;
+  @include fontSize (25);
+}
