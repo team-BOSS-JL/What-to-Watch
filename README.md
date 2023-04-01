@@ -68,6 +68,6 @@ Contributions are always welcome! Please follow these steps:
 Thank you for taking the time to read this README and for your interest in this project. Your feedback and suggestions are greatly appreciated! 
    
 
-Sencirely, 
+Sincerely, 
 
  J&L Team ♥.  
