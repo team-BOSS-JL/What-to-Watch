@@ -12,11 +12,11 @@ Table of Contents
     
 
  ► Features
-
-   1. Browse a collection of movies
-   2. Search for a specific movie by name
-   3. Filter movies by popularity, top rated, and upcoming
-   4. Select a genre to see a list of movies in that genre
+ 
+    Browse a collection of movies
+    Search for a specific movie by name
+    Filter movies by popularity, top rated, and upcoming
+    Select a genre to see a list of movies in that genre
 
 ► Technologies
 
