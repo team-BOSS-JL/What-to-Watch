@@ -540,4 +540,16 @@ img {
   animation-duration: 1.7s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+}
+
+@media (max-width: 480px) {
+  header .mainHeader {
+    height: 80vh;
+  }
+  header .mainHeader h1 {
+    text-align: center;
+  }
+  header .mainHeader .buttonsContainer {
+    display: flex;
+  }
 }/*# sourceMappingURL=styles.css.map */
