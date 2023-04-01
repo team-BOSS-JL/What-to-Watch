@@ -1,4 +1,4 @@
-                                                                What to Watch
+                                             What to Watch
 
   This project is a web app that allows users to browse a collection of movies and search for a specific movie. The data is retrieved from The Movie Database API.
 
@@ -52,6 +52,7 @@ Usage
    2. Use the search bar to search for a movie by name.
    3. Use the filter buttons to view movies by popularity, top rated, and upcoming.
    4. Use the genre dropdown to select a genre and view a list of movies in that genre.
+   
 
 Contributing
 
