@@ -1,12 +1,16 @@
 @font-face {
   font-family: "Jakarta Sans";
-  src: url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Regular.woff), url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Regular.woff2), url(../fonts/PlusJakarta_Sans-2.5/static/PlusJakartaSans-Regular.ttf);
+  src: url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Regular.woff),
+    url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Regular.woff2),
+    url(../fonts/PlusJakarta_Sans-2.5/static/PlusJakartaSans-Regular.ttf);
   font-weight: normal;
 }
 
 @font-face {
   font-family: "Jakarta Sans";
-  src: url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Bold.woff), url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Bold.woff2), url(../fonts/PlusJakarta_Sans-2.5/static/PlusJakartaSans-Bold.ttf);
+  src: url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Bold.woff),
+    url(../fonts/PlusJakarta_Sans-2.5/webfonts/PlusJakartaSans-Bold.woff2),
+    url(../fonts/PlusJakarta_Sans-2.5/static/PlusJakartaSans-Bold.ttf);
   font-weight: bold;
 }
 
@@ -29,19 +33,17 @@ body {
 h1 {
   color: $secondary;
   font-family: $primaryFont;
-  @include fontSize (68);
-
+  @include fontSize(68);
 }
 
 h2 {
-  @include fontSize (22);
+  @include fontSize(22);
 }
 
 // ==== Header Typography ====
 .mainHeader {
-
   & p {
-    @include fontSize (18);
+    @include fontSize(18);
   }
 }
 
@@ -53,23 +55,23 @@ h2 {
 // ==== Form Typography ====
 .genreSelect {
   font-size: 16px;
-  color: $primary;
+  color: $secondary;
   text-align: center;
-  letter-spacing: .1rem;
-  transition: .4s ease-in-out;
+  letter-spacing: 0.1rem;
+  transition: 0.4s ease-in-out;
 
-  &.genreSelect:hover {
-    letter-spacing: .2rem;
+  &:hover {
+    letter-spacing: 0.2rem;
     color: $quaternary;
   }
 }
 
-.genreSelect>option {
-  color: $septenary;
+.genreSelect > option {
+  color: $secondary;
   font-family: $secondaryFont;
   font-weight: 500;
   font-style: italic;
-  @include fontSize (18);
+  @include fontSize(18);
 }
 
 // ==== Go Top Button Typography ====
@@ -77,5 +79,6 @@ h2 {
   color: $solidwhite;
   font-weight: bold;
   cursor: pointer;
-  @include fontSize (25);
+  @include fontSize(25);
 }
+

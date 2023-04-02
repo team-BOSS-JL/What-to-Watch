@@ -333,13 +333,13 @@ h2 {
 
 .genreSelect {
   font-size: 16px;
-  color: #222;
+  color: rgba(54, 75, 89, 0.8549019608);
   text-align: center;
   letter-spacing: 0.1rem;
   -webkit-transition: 0.4s ease-in-out;
   transition: 0.4s ease-in-out;
 }
-.genreSelect.genreSelect:hover {
+.genreSelect:hover {
   letter-spacing: 0.2rem;
   color: #bf6c6c;
 }
@@ -501,7 +501,7 @@ img {
 }
 
 .movieCard {
-  background-color: #fff;
+  background-color: #ffffff;
   -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
@@ -527,6 +527,12 @@ img {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   text-align: center;
+}
+
+.movieCard p {
+  font-size: 1rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
 }
 
 .movieCard p {
@@ -590,4 +596,18 @@ img {
           animation-timing-function: ease-in-out;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
+}
+
+@media (max-width: 480px) {
+  header .mainHeader {
+    height: 80vh;
+  }
+  header .mainHeader h1 {
+    text-align: center;
+  }
+  header .mainHeader .buttonsContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
