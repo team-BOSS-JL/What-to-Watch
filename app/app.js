@@ -1,5 +1,6 @@
 // Define the movieApp object with its properties and methods
 const movieApp = {
+  genreTitles: "Trending Movies",
   // This variable stores the API key needed to access The Movie Database API.
   apiKey: "33bee90148c2091232a05dfb02573f40",
 
@@ -17,6 +18,7 @@ const movieApp = {
 
   // This variable is used to store a reference to the <ul> element with an ID of "moviesGrid" in the HTML document.
   moviesGrid: document.getElementById("moviesGrid"),
+  genreTitle: document.getElementById("genreTitle"),
 
   // These variables are used to store references to the <button> elements with IDs of "popularBtn", "topRatedBtn", and "upcomingBtn" in the HTML document.
   popularBtn: document.getElementById("popularBtn"),
@@ -40,7 +42,7 @@ const movieApp = {
       return;
     }
 
-    // // Check if search term contains any characters other than letters or numbers
+    // Check if search term contains any characters other than letters or numbers
     if (!searchTerm.match(/^[a-zA-Z0-9]+$/)) {
       // Display message if search term contains characters other than letters or numbers
       this.moviesGrid.innerHTML = "Please enter letters or numbers only.";
@@ -78,9 +80,9 @@ const movieApp = {
     // Initialize an empty string variable to store the HTML templates for each movie
     let moviesHtml = "";
 
-    //   // Iterate over each movie object in the array using a forEach loop
+    // Iterate over each movie object in the array using a forEach loop
     movies.forEach((movie) => {
-      //     // Use template literals to create an HTML template for each movie with its details
+      // Use template literals to create an HTML template for each movie with its details
       moviesHtml += `
       <li class="movieCard">
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
@@ -93,7 +95,7 @@ const movieApp = {
     `;
     });
 
-    //   // Assign the generated HTML to the innerHTML property of a moviesGrid element to display the movies on the page
+    // Assign the generated HTML to the innerHTML property of a moviesGrid element to display the movies on the page
     this.moviesGrid.innerHTML = moviesHtml;
   },
 
@@ -111,7 +113,8 @@ const movieApp = {
           // Create a new option element for each genre
           const option = document.createElement("option");
           // Set the option's value property to the genre's ID and its text property to the genre's name
-          option.value = genre.id;
+          option.value = genre.name;
+          option.dataset.name = genre.id;
           option.text = genre.name;
           // Add the option element to the select element in the DOM
           this.genreSelect.appendChild(option);
@@ -127,7 +130,10 @@ const movieApp = {
     // When the user changes the selected genre, the function inside the arrow function will be executed.
     this.genreSelect.addEventListener("change", () => {
       // Gets the value of the selected genre.
-      const genreId = this.genreSelect.value;
+      const genreId =
+        this.genreSelect.options[genreSelect.selectedIndex].dataset.name;
+      this.genreTitles = this.genreSelect.value;
+      this.genreTitle.innerHTML = this.genreTitles;
       // Constructs a URL to fetch movies based on the selected genre.
       const url = `${this.movieUrl}?api_key=${this.apiKey}&language=en-US&with_genres=${genreId}`;
       // Fetches the movies based on the constructed URL.
@@ -169,10 +175,10 @@ const movieApp = {
   // Define a function to handle scrolling and display a "go to top" button
   // This function is responsible for showing and hiding a "go to top" button based on the user's scroll position on the page.
   scrollFunction() {
-    //   // Get the button element with the ID "goTopBtn" from the DOM.
+    // Get the button element with the ID "goTopBtn" from the DOM.
     const goTopBtn = document.getElementById("goTopBtn");
 
-    //   // Check if the user has scrolled down more than 20 pixels using three different methods.
+    // Check if the user has scrolled down more than 20 pixels using three different methods.
     if (
       window.scrollY > 20 || // Check scroll position on window object
       document.body.scrollTop > 20 || // Check scroll position on body element
@@ -181,11 +187,11 @@ const movieApp = {
       // If the user has scrolled down more than 20 pixels, display the "go to top" button by setting its CSS display property to "block".
       goTopBtn.style.display = "block";
     } else {
-      //     // Otherwise, hide the "go to top" button by setting its display property to "none".
+      // Otherwise, hide the "go to top" button by setting its display property to "none".
       goTopBtn.style.display = "none";
     }
 
-    //   // Add an event listener to the button so that when it is clicked, the window will scroll smoothly to the top of the page.
+    // Add an event listener to the button so that when it is clicked, the window will scroll smoothly to the top of the page.
     goTopBtn.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
@@ -196,12 +202,12 @@ const movieApp = {
 
   // Define an init function to set up the app and bind event listeners
   init() {
-    // // Set up an event listener for when the user submits a search form
+    // Set up an event listener for when the user submits a search form
     this.searchForm.addEventListener("submit", (event) => {
       event.preventDefault(); // Prevent the default behavior of submitting a form
       const searchTerm = this.searchInput.value; // Get the value of the search input
       if (searchTerm) {
-        //     // If the search term is not empty
+        // If the search term is not empty
         this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
       }
     });
@@ -212,11 +218,57 @@ const movieApp = {
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
 
+    // Set up an event listener for when the user clicks the popular button and displays text
+    this.popularBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`;
+      this.fetchMovies(url);
+      displayText("Popular");
+      // Added the call to the resetSelect function in the event listener
+      resetSelect();
+    });
+
+    // Set up an event listener to display the text of the button on the page when clicked
+    function displayText(text) {
+      const h2 = document.createElement("h2");
+      const textNode = document.createTextNode(text);
+      h2.appendChild(textNode);
+      const existingH2 = document.getElementById("genreTitle");
+      if (existingH2) {
+        existingH2.textContent = text;
+      } else {
+        h2.id = "genreTitle";
+        document.body.appendChild(h2);
+      }
+    }
+
     // Set up an event listener for when the user clicks the top rated button
     this.topRatedBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
+
+    // Set up an event listener to display the text of the button on the page when clicked
+    this.topRatedBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`;
+      this.fetchMovies(url);
+      displayText("Top Rated");
+      // Added the call to the resetSelect function in the event listener
+      resetSelect();
+    });
+
+    // Created function to display the text of the button to the page
+    function displayText(text) {
+      const h2 = document.createElement("h2");
+      const textNode = document.createTextNode(text);
+      h2.appendChild(textNode);
+      const existingH2 = document.getElementById("genreTitle");
+      if (existingH2) {
+        existingH2.textContent = text;
+      } else {
+        h2.id = "genreTitle";
+        document.body.appendChild(h2);
+      }
+    }
 
     // Set up an event listener for when the user clicks the upcoming button
     this.upcomingBtn.addEventListener("click", () => {
@@ -224,20 +276,54 @@ const movieApp = {
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
 
+    // Set up an event listener to display the text of the button on the page when clicked
+    this.upcomingBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`;
+      this.fetchMovies(url);
+      displayText("Upcoming");
+      // Added the call to the resetSelect function in the event listener
+      resetSelect();
+    });
+
+    // Created function to display the text of the button to the page
+    function displayText(text) {
+      const h2 = document.createElement("h2");
+      const textNode = document.createTextNode(text);
+      h2.appendChild(textNode);
+      const existingH2 = document.getElementById("genreTitle");
+      if (existingH2) {
+        existingH2.textContent = text;
+      } else {
+        h2.id = "genreTitle";
+        document.body.appendChild(h2);
+      }
+    }
+
+    // Create a function that resets the select element with an id of genreSelect
+    function resetSelect() {
+      const select = document.getElementById("genreSelect");
+      select.selectedIndex = 0;
+    }
+
     // Fetch trending movies and render them on page load
     const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${this.apiKey}&language=en-US`;
     this.fetchMovies(trendingUrl);
 
-    // // Call the fetchMovies() method with the default movieUrl URL
+    // Call the fetchMovies() method with the default movieUrl URL
     this.fetchMovies(`${this.movieUrl}?api_key=${this.apiKey}&language=en-US`);
 
     // Call the fetchGenres() and addGenreChangeListener() methods
     this.fetchGenres();
     this.addGenreChangeListener();
 
-    // // Set up an event listener for when the user scrolls
+    // Set up an event listener for when the user scrolls
     window.addEventListener("scroll", () => {
       this.scrollFunction(); // Call the scrollFunction() method
+    });
+
+    window.addEventListener("load", () => {
+      const genreSelect = document.getElementById("genreSelect");
+      genreSelect.selectedIndex = 0;
     });
   },
 };
