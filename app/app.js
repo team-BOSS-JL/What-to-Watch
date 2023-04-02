@@ -31,6 +31,8 @@ const movieApp = {
   // This variable is used to store a reference to the <input> element with a class of "searchInput" in the HTML document.
   searchInput: document.querySelector(".searchInput"),
 
+  genreTitles: "Trending Movies",
+
   // This method searches for movies by calling an external API with the provided search term
   // It also defines a displayMovies() method that takes a list of movies and generates HTML to display them on the page
   searchMovies(searchTerm) {
@@ -241,14 +243,14 @@ const movieApp = {
     this.fetchGenres();
     this.addGenreChangeListener();
 
-    // Set up an event listener for when the user scrolls
-    window.addEventListener("scroll", () => {
-      this.scrollFunction(); // Call the scrollFunction() method
-    });
-
     window.addEventListener("load", () => {
       const genreSelect = document.getElementById("genreSelect");
       genreSelect.selectedIndex = 0;
+    });
+
+    // Set up an event listener for when the user scrolls
+    window.addEventListener("scroll", () => {
+      this.scrollFunction(); // Call the scrollFunction() method
     });
   },
 };
