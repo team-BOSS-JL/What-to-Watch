@@ -245,6 +245,11 @@ const movieApp = {
     window.addEventListener("scroll", () => {
       this.scrollFunction(); // Call the scrollFunction() method
     });
+
+    window.addEventListener("load", () => {
+      const genreSelect = document.getElementById("genreSelect");
+      genreSelect.selectedIndex = 0;
+    });
   },
 };
 
