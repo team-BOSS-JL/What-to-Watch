@@ -12,6 +12,6 @@
   ],
   "liveSassCompile.settings.generateMap": false,
   "liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions"],
-  "liveServer.settings.port": 5502,
+  "liveServer.settings.port": 5503,
   "cSpell.words": ["COLOURS", "solidblack", "solidgray", "solidwhite", "TMDB"]
 }
