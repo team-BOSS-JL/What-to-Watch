@@ -220,17 +220,92 @@ const movieApp = {
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
 
+    // Set up an event listener for when the user clicks the popular button and displays text
+    this.popularBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`;
+      this.fetchMovies(url);
+      displayText("Popular");
+      // Added the call to the resetSelect function in the event listener
+      resetSelect();
+    });
+
+    // Set up an event listener to display the text of the button on the page when clicked
+    function displayText(text) {
+      const h2 = document.createElement("h2");
+      const textNode = document.createTextNode(text);
+      h2.appendChild(textNode);
+      const existingH2 = document.getElementById("genreTitle");
+      if (existingH2) {
+        existingH2.textContent = text;
+      } else {
+        h2.id = "genreTitle";
+        document.body.appendChild(h2);
+      }
+    }
+
     // Set up an event listener for when the user clicks the top rated button
     this.topRatedBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
 
+    // Set up an event listener to display the text of the button on the page when clicked
+    this.topRatedBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`;
+      this.fetchMovies(url);
+      displayText("Top Rated");
+      // Added the call to the resetSelect function in the event listener
+      resetSelect();
+    });
+
+    // Created function to display the text of the button to the page
+    function displayText(text) {
+      const h2 = document.createElement("h2");
+      const textNode = document.createTextNode(text);
+      h2.appendChild(textNode);
+      const existingH2 = document.getElementById("genreTitle");
+      if (existingH2) {
+        existingH2.textContent = text;
+      } else {
+        h2.id = "genreTitle";
+        document.body.appendChild(h2);
+      }
+    }
+
     // Set up an event listener for when the user clicks the upcoming button
     this.upcomingBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
     });
+
+    // Set up an event listener to display the text of the button on the page when clicked
+    this.upcomingBtn.addEventListener("click", () => {
+      const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`;
+      this.fetchMovies(url);
+      displayText("Upcoming");
+      // Added the call to the resetSelect function in the event listener
+      resetSelect();
+    });
+
+    // Created function to display the text of the button to the page
+    function displayText(text) {
+      const h2 = document.createElement("h2");
+      const textNode = document.createTextNode(text);
+      h2.appendChild(textNode);
+      const existingH2 = document.getElementById("genreTitle");
+      if (existingH2) {
+        existingH2.textContent = text;
+      } else {
+        h2.id = "genreTitle";
+        document.body.appendChild(h2);
+      }
+    }
+
+    // Create a function that resets the select element with an id of genreSelect
+    function resetSelect() {
+      const select = document.getElementById("genreSelect");
+      select.selectedIndex = 0;
+    }
 
     // Fetch trending movies and render them on page load
     const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${this.apiKey}&language=en-US`;

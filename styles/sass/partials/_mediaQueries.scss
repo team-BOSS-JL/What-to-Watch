@@ -1,0 +1,16 @@
+// landscape phones and down
+@media (max-width: 480px) {
+    header {
+        .mainHeader {
+            height: 80vh;
+            
+            h1 {
+                text-align: center;
+            }
+
+            .buttonsContainer {
+                display: flex;
+            }
+        }
+    }
+}
