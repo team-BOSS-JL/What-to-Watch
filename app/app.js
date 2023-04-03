@@ -151,6 +151,7 @@ const movieApp = {
       const url = `${this.movieUrl}?api_key=${this.apiKey}&language=en-US&with_genres=${genreId}`;
       // Fetches the movies based on the constructed URL.
       this.fetchMovies(url);
+      resetSearchBar();
     });
   },
 
@@ -209,8 +210,21 @@ const movieApp = {
       if (searchTerm) {
         // If the search term is not empty
         this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
+        updateH2WithSearchTerm(searchTerm); // Call the updateH2WithSearchTerm function
       }
     });
+
+    // write a function to update the h2 on the page with the value the user inputs in the search bar
+    function updateH2WithSearchTerm(searchTerm) {
+      const h2Element = document.querySelector("h2.genreTitle");
+      h2Element.textContent = `Search results for "${searchTerm}"`;
+    }
+
+    // write a function to reset the search bar when another button is clicked or page is refreshed
+    function resetSearchBar() {
+      searchInput.value = "";
+      searchInput.placeholder = "Enter a movie name...";
+    }
 
     // Set up an event listener for when the user clicks the popular button
     this.popularBtn.addEventListener("click", () => {
@@ -219,6 +233,7 @@ const movieApp = {
       displayText("Popular Movies");
       //Resets the select element when the button it's been clicked
       resetSelect();
+      resetSearchBar();
     });
 
     // Set up an event listener for when the user clicks the top rated button
@@ -228,6 +243,7 @@ const movieApp = {
       displayText("Top Rated Movies");
       //Resets the select element when the button it's been clicked
       resetSelect();
+      resetSearchBar();
     });
 
     // Set up an event listener for when the user clicks the upcoming button
@@ -237,6 +253,7 @@ const movieApp = {
       displayText("Upcoming Movies");
       //Resets the select element when the button it's been clicked
       resetSelect();
+      resetSearchBar();
     });
 
     // Created function to display the text of the button to the page
@@ -273,6 +290,7 @@ const movieApp = {
     window.addEventListener("load", () => {
       const genreSelect = document.getElementById("genreSelect");
       genreSelect.selectedIndex = 0;
+      resetSearchBar();
     });
 
     // Set up an event listener for when the user scrolls
