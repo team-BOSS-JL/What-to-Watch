@@ -78,27 +78,38 @@ const movieApp = {
 
   // Generate HTML code for each movie returned by the API and concatenate them into a single string
   // This function takes an array of movie objects and displays them on the page in a specific format
+  createMovieCard(movie) {
+    const movieCard = document.createElement("li");
+    movieCard.classList.add("movieCard");
+    const moviePoster = document.createElement("img");
+    moviePoster.classList.add("movieImg");
+
+    moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    moviePoster.alt = `${movie.title} poster`;
+    movieCard.appendChild(moviePoster);
+    const movieTitle = document.createElement("h3");
+    movieTitle.textContent = `${movie.title} (${movie.release_date.substring(
+      0,
+      4
+    )})`;
+    movieCard.appendChild(movieTitle);
+    const movieOverview = document.createElement("p");
+    movieOverview.textContent = movie.overview;
+    movieCard.appendChild(movieOverview);
+    const movieRating = document.createElement("p");
+    movieRating.textContent = `Rating: ${movie.vote_average}/10`;
+    movieCard.appendChild(movieRating);
+    return movieCard;
+  },
+
   displayMovies(movies) {
-    // Initialize an empty string variable to store the HTML templates for each movie
-    let moviesHtml = "";
-
-    // Iterate over each movie object in the array using a forEach loop
+    const movieFragment = document.createDocumentFragment();
     movies.forEach((movie) => {
-      // Use template literals to create an HTML template for each movie with its details
-      moviesHtml += `
-      <li class="movieCard">
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
-        movie.title
-      } poster">
-        <h3>${movie.title} (${movie.release_date.substring(0, 4)})</h3>
-        <p>${movie.overview}</p>
-        <p>Rating: ${movie.vote_average}/10</p>
-      </li>
-    `;
+      const movieCard = this.createMovieCard(movie);
+      movieFragment.appendChild(movieCard);
     });
-
-    // Assign the generated HTML to the innerHTML property of a moviesGrid element to display the movies on the page
-    this.moviesGrid.innerHTML = moviesHtml;
+    this.moviesGrid.innerHTML = "";
+    this.moviesGrid.appendChild(movieFragment);
   },
 
   // Define a function to fetch the movie genres and add them to the genre select dropdown
@@ -147,30 +158,17 @@ const movieApp = {
   // The fetchMovies function takes a URL as its argument and uses the fetch API to make a GET request to that URL
   fetchMovies(url) {
     fetch(url)
-      // Once the response is returned, we parse the response body as JSON
       .then((response) => response.json())
-      // The data now contains the JSON data we requested. We extract the movies from the data and store them in a variable
       .then((data) => {
         const movies = data.results;
-        let moviesHtml = "";
-        // We use the forEach method to iterate over each movie in the movies array
+        const moviesFragment = document.createDocumentFragment();
         movies.forEach((movie) => {
-          // For each movie, we create a string of HTML markup using template literals and append it to the moviesHtml variable
-          moviesHtml += `
-          <li class="movieCard">
-            <img src="https://image.tmdb.org/t/p/w500${
-              movie.poster_path
-            }" alt="${movie.title} poster">
-            <h3>${movie.title} (${movie.release_date.substring(0, 4)})</h3>
-            <p>${movie.overview}</p>
-            <p>Rating: ${movie.vote_average}/10</p>
-          </li>
-        `;
+          const movieCard = this.createMovieCard(movie);
+          moviesFragment.appendChild(movieCard);
         });
-        // We set the innerHTML property of the moviesGrid element to the moviesHtml string, which renders the movies on the page
-        this.moviesGrid.innerHTML = moviesHtml;
+        this.moviesGrid.innerHTML = "";
+        this.moviesGrid.appendChild(moviesFragment);
       })
-      // If there is an error during any part of this process, we log the error to the console
       .catch((error) => console.error(error));
   },
 
@@ -218,72 +216,26 @@ const movieApp = {
     this.popularBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`; // Construct a URL for popular movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-    });
-
-    // Set up an event listener for when the user clicks the popular button and displays text
-    this.popularBtn.addEventListener("click", () => {
-      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`;
-      this.fetchMovies(url);
-      displayText("Popular");
-      // Added the call to the resetSelect function in the event listener
+      displayText("Popular Movies");
+      //Resets the select element when the button it's been clicked
       resetSelect();
     });
-
-    // Set up an event listener to display the text of the button on the page when clicked
-    function displayText(text) {
-      const h2 = document.createElement("h2");
-      const textNode = document.createTextNode(text);
-      h2.appendChild(textNode);
-      const existingH2 = document.getElementById("genreTitle");
-      if (existingH2) {
-        existingH2.textContent = text;
-      } else {
-        h2.id = "genreTitle";
-        document.body.appendChild(h2);
-      }
-    }
 
     // Set up an event listener for when the user clicks the top rated button
     this.topRatedBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-    });
-
-    // Set up an event listener to display the text of the button on the page when clicked
-    this.topRatedBtn.addEventListener("click", () => {
-      const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`;
-      this.fetchMovies(url);
-      displayText("Top Rated");
-      // Added the call to the resetSelect function in the event listener
+      displayText("Top Rated Movies");
+      //Resets the select element when the button it's been clicked
       resetSelect();
     });
-
-    // Created function to display the text of the button to the page
-    function displayText(text) {
-      const h2 = document.createElement("h2");
-      const textNode = document.createTextNode(text);
-      h2.appendChild(textNode);
-      const existingH2 = document.getElementById("genreTitle");
-      if (existingH2) {
-        existingH2.textContent = text;
-      } else {
-        h2.id = "genreTitle";
-        document.body.appendChild(h2);
-      }
-    }
 
     // Set up an event listener for when the user clicks the upcoming button
     this.upcomingBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-    });
-
-    // Set up an event listener to display the text of the button on the page when clicked
-    this.upcomingBtn.addEventListener("click", () => {
-      const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`;
-      this.fetchMovies(url);
-      displayText("Upcoming");
-      // Added the call to the resetSelect function in the event listener
+      displayText("Upcoming Movies");
+      //Resets the select element when the button it's been clicked
       resetSelect();
     });
 
