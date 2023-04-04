@@ -60,7 +60,7 @@ const movieApp = {
     if (!searchTerm.match(/^[a-zA-Z0-9]/)) {
       // Display message if first character is a special character
       this.moviesGrid.innerHTML =
-        "Search term cannot begin with a special character.";
+        "Search term cannot begin with a special character or space.";
       return;
     }
 
@@ -118,10 +118,7 @@ const movieApp = {
     movieCard.appendChild(moviePoster);
     const movieTitle = document.createElement("h3");
     movieTitle.classList.add("movieTitle");
-    movieTitle.textContent = `${movie.title} (${movie.release_date.substring(
-      0,
-      4
-    )})`;
+    movieTitle.textContent = `${movie.title}`;
     movieCard.appendChild(movieTitle);
     const movieOverview = document.createElement("p");
     movieOverview.classList.add("movieOverview");
@@ -328,7 +325,6 @@ const movieApp = {
       ) {
         const movie = event.target.closest(".movieCard");
         const movieTitle = movie.children[1].textContent;
-
         const movieOverview = movie.children[2].textContent;
         const movieRating = movie.children[3].textContent;
 
