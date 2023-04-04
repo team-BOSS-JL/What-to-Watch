@@ -244,7 +244,6 @@ const movieApp = {
         this.moviesGrid.innerHTML =
           "The search is empty, please type a movie name to be searched. Thanks!";
         return;
-        
       }
     });
 
