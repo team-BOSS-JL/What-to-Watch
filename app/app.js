@@ -239,11 +239,12 @@ const movieApp = {
       if (searchTerm) {
         // If the search term is not empty
         this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
+        updateH2WithSearchTerm(searchTerm); // Call the updateH2WithSearchTerm function
       } else {
         this.moviesGrid.innerHTML =
           "The search is empty, please type a movie name to be searched. Thanks!";
         return;
-        updateH2WithSearchTerm(searchTerm); // Call the updateH2WithSearchTerm function
+        
       }
     });
 
