@@ -17,13 +17,10 @@
   }
 }
 
-.goTopBtn {
-
-  & .goTopIcon {
-    padding: 18px 0 0 16px;
-    animation-name: bounce;
-    animation-duration: 1.7s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-  }
+.goTopIcon {
+  padding: 18px 0 0 16px;
+  animation-name: bounce;
+  animation-duration: 1.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }

@@ -7,21 +7,29 @@
   background-color: $tertiary;
   color: $primary;
   padding: 13rem 0;
-}
 
-.mainHeader h1 {
-  margin-bottom: 1rem;
-}
+  & h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+  }
 
-.mainHeader h2 {
-  margin-bottom: 0.5rem;
+  & h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  & .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .buttonsContainer {
   margin: 1.5rem 0;
 }
 
-/* Code courtesy of @ke1221 (some modification by Team JL)*/
+/* Code courtesy of @ke1221 (some modification by JL Team) */
 
 .headerBtn {
   color: $secondary;
@@ -33,11 +41,11 @@
   border: 1px solid $quinary;
   transition: all 0.3s;
   box-shadow: 6px 6px 12px $senary, -6px -6px 12px $solidwhite;
-}
 
-.headerBtn:active {
-  color: $quaternary;
-  box-shadow: inset 4px 4px 12px $senary, inset -4px -4px 12px $solidwhite;
+  &:active {
+    color: $quaternary;
+    box-shadow: inset 4px 4px 12px $senary, inset -4px -4px 12px $solidwhite;
+  }
 }
 
 /* End Code courtesy of @ke1221 some modification by me */

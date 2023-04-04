@@ -64,14 +64,33 @@ h2 {
     letter-spacing: 0.2rem;
     color: $quaternary;
   }
+
+  & option {
+    color: $secondary;
+    font-family: $secondaryFont;
+    font-weight: 500;
+    font-style: italic;
+    @include fontSize(18);
+  }
 }
 
-.genreSelect > option {
-  color: $secondary;
-  font-family: $secondaryFont;
-  font-weight: 500;
-  font-style: italic;
-  @include fontSize(18);
+// ==== .moviesCard Typography ====
+.movieTitle {
+  font-family: $primaryFont;
+  text-align: center;
+  @include fontSize(22);
+}
+
+.movieOverview {
+  line-height: 1.2;
+}
+
+// ==== .genreTitle Typography ====
+.genreTitle {
+  font-family: $primaryFont;
+  line-height: 5rem;
+  letter-spacing: .1rem;
+  @include fontSize(50);
 }
 
 // ==== Go Top Button Typography ====
@@ -82,3 +101,31 @@ h2 {
   @include fontSize(25);
 }
 
+// ==== Modal Typography ====
+.modalContentContainer {
+  color: $solidwhite;
+}
+
+.modalTitle {
+  font-family: $primaryFont;
+  @include fontSize(25.6);
+}
+
+.modalOverview {
+  line-height: 1.3rem;
+  letter-spacing: .1rem;
+  @include fontSize(20.8);
+}
+
+.close {
+  color: $senary;
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  &:hover,
+  &:focus {
+    color: $quaternary;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
