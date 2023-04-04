@@ -1,6 +1,5 @@
 // Define the movieApp object with its properties and methods
 const movieApp = {
-  genreTitles: "Trending Movies",
   // This variable stores the API key needed to access The Movie Database API.
   apiKey: "33bee90148c2091232a05dfb02573f40",
 
@@ -33,6 +32,19 @@ const movieApp = {
 
   genreTitles: "Trending Movies",
 
+  // <============ MODAL ==============>
+  // get movie cards elements
+  movieCards: document.querySelectorAll(".movieCard"),
+  modal: document.getElementById("myModal"),
+  closeBtn: document.querySelector(".close"),
+  modalTitle: document.querySelector(".modalContentContainer #modalTitle"),
+  modalOverview: document.querySelector(
+    ".modalContentContainer #modalOverview"
+  ),
+  modalRating: document.querySelector(".modalContentContainer #modalRating"),
+
+  // <============ END MODAL ==============>
+
   // This method searches for movies by calling an external API with the provided search term
   // It also defines a displayMovies() method that takes a list of movies and generates HTML to display them on the page
   searchMovies(searchTerm) {
@@ -44,10 +56,21 @@ const movieApp = {
       return;
     }
 
-    // Check if search term contains any characters other than letters or numbers
-    if (!searchTerm.match(/^[a-zA-Z0-9]+$/)) {
-      // Display message if search term contains characters other than letters or numbers
-      this.moviesGrid.innerHTML = "Please enter letters or numbers only.";
+    // Check if first character of search term is a special character
+    if (!searchTerm.match(/^[a-zA-Z0-9]/)) {
+      // Display message if first character is a special character
+      this.moviesGrid.innerHTML =
+        "Search term cannot begin with a special character.";
+      return;
+    }
+
+    // Check if search term contains any characters other than letters, numbers, spaces, or valid special characters
+    if (
+      !searchTerm.match(/^[a-zA-Z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]+$/)
+    ) {
+      // Display message if search term contains invalid characters
+      this.moviesGrid.innerHTML =
+        "Please enter letters, numbers, spaces, or valid special characters only.";
       return;
     }
 
@@ -65,9 +88,16 @@ const movieApp = {
         return response.json();
       })
       .then((data) => {
-        // Extract list of movies from returned data and pass to displayMovies() method for rendering
+        // Extract list of movies from returned data
         const movies = data.results;
-        this.displayMovies(movies);
+
+        // Filter out movies that don't have a poster, description, or title
+        const validMovies = movies.filter((movie) => {
+          return movie.poster_path && movie.overview && movie.title;
+        });
+
+        // Pass validMovies to displayMovies() method for rendering
+        this.displayMovies(validMovies);
       })
       .catch((error) => {
         // Display error message if promise is rejected
@@ -75,7 +105,6 @@ const movieApp = {
         this.moviesGrid.innerHTML = "Error fetching search results.";
       });
   },
-
   // Generate HTML code for each movie returned by the API and concatenate them into a single string
   // This function takes an array of movie objects and displays them on the page in a specific format
   createMovieCard(movie) {
@@ -88,15 +117,18 @@ const movieApp = {
     moviePoster.alt = `${movie.title} poster`;
     movieCard.appendChild(moviePoster);
     const movieTitle = document.createElement("h3");
+    movieTitle.classList.add("movieTitle");
     movieTitle.textContent = `${movie.title} (${movie.release_date.substring(
       0,
       4
     )})`;
     movieCard.appendChild(movieTitle);
     const movieOverview = document.createElement("p");
+    movieOverview.classList.add("movieOverview");
     movieOverview.textContent = movie.overview;
     movieCard.appendChild(movieOverview);
     const movieRating = document.createElement("p");
+    movieRating.classList.add("movieRating");
     movieRating.textContent = `Rating: ${movie.vote_average}/10`;
     movieCard.appendChild(movieRating);
     return movieCard;
@@ -209,6 +241,10 @@ const movieApp = {
       if (searchTerm) {
         // If the search term is not empty
         this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
+      } else {
+        this.moviesGrid.innerHTML =
+          "The search is empty, please type a movie name to be searched. Thanks!";
+        return;
       }
     });
 
@@ -216,8 +252,8 @@ const movieApp = {
     this.popularBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`; // Construct a URL for popular movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-      displayText("Popular Movies");
-      //Resets the select element when the button it's been clicked
+      displayText("Popular");
+      // Added the call to the resetSelect function in the event listener
       resetSelect();
     });
 
@@ -225,8 +261,8 @@ const movieApp = {
     this.topRatedBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-      displayText("Top Rated Movies");
-      //Resets the select element when the button it's been clicked
+      displayText("Top Rated");
+      // Added the call to the resetSelect function in the event listener
       resetSelect();
     });
 
@@ -234,8 +270,8 @@ const movieApp = {
     this.upcomingBtn.addEventListener("click", () => {
       const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
-      displayText("Upcoming Movies");
-      //Resets the select element when the button it's been clicked
+      displayText("Upcoming");
+      // Added the call to the resetSelect function in the event listener
       resetSelect();
     });
 
@@ -279,6 +315,43 @@ const movieApp = {
     window.addEventListener("scroll", () => {
       this.scrollFunction(); // Call the scrollFunction() method
     });
+
+    // <============ MODAL ==============>
+
+    moviesGrid.addEventListener("click", (event) => {
+      if (
+        event.target.classList.contains("movieImg") ||
+        event.target.classList.contains("movieTitle") ||
+        event.target.classList.contains("movieOverview") ||
+        event.target.classList.contains("movieRating") ||
+        event.target.classList.contains("movieCard")
+      ) {
+        const movie = event.target.closest(".movieCard");
+        const movieTitle = movie.children[1].textContent;
+
+        const movieOverview = movie.children[2].textContent;
+        const movieRating = movie.children[3].textContent;
+
+        this.modalTitle.textContent = movieTitle;
+        this.modalOverview.textContent = movieOverview;
+        this.modalRating.textContent = `${movieRating}`;
+        this.modal.style.display = "flex";
+      }
+    });
+
+    // When the user clicks on the close button, close the modal
+    this.closeBtn.addEventListener("click", () => {
+      this.modal.style.display = "none";
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener("click", (event) => {
+      if (event.target === this.modal) {
+        this.modal.style.display = "none";
+      }
+    });
+
+    // <============ END MODAL ==============>
   },
 };
 
