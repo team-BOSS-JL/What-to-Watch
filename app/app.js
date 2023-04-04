@@ -253,7 +253,7 @@ const movieApp = {
       const url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US`; // Construct a URL for popular movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
       displayText("Popular");
-      // Added the call to the resetSelect function in the event listener
+      //Resets the select element when the button it's been clicked
       resetSelect();
     });
 
@@ -262,7 +262,7 @@ const movieApp = {
       const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US`; // Construct a URL for top rated movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
       displayText("Top Rated");
-      // Added the call to the resetSelect function in the event listener
+      //Resets the select element when the button it's been clicked
       resetSelect();
     });
 
@@ -271,7 +271,7 @@ const movieApp = {
       const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US`; // Construct a URL for upcoming movies
       this.fetchMovies(url); // Call the fetchMovies() method with the URL
       displayText("Upcoming");
-      // Added the call to the resetSelect function in the event listener
+      //Resets the select element when the button it's been clicked
       resetSelect();
     });
 
