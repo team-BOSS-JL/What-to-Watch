@@ -240,6 +240,8 @@ const movieApp = {
         // If the search term is not empty
         this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
       } else {
+        const h2Element = document.querySelector("h2.genreTitle");
+        h2Element.textContent = ``;
         this.moviesGrid.innerHTML =
           "The search is empty, please type a movie name to be searched. Thanks!";
         return;
