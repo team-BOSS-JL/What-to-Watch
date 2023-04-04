@@ -241,6 +241,8 @@ const movieApp = {
         this.searchMovies(searchTerm); // Call the searchMovies() method with the search term
         updateH2WithSearchTerm(searchTerm); // Call the updateH2WithSearchTerm function
       } else {
+        const h2Element = document.querySelector("h2.genreTitle");
+        h2Element.textContent = ``;
         this.moviesGrid.innerHTML =
           "The search is empty, please type a movie name to be searched. Thanks!";
         return;
