@@ -17,7 +17,6 @@
   <header class="mainHeader">
     <div class="wrapper">
       <h1>What to Watch</h1>
-
       <div class="buttonsContainer">
         <button id="topRatedBtn" value="Top Rated" class="headerBtn">
           Top Rated
@@ -59,7 +58,48 @@
     <section class="wrapper">
       <h2 id="genreTitle" class="genreTitle">Trending</h2>
       <ul id="moviesGrid" class="moviesGrid"></ul>
+      <div class="buttonsContainer">
+        <button id="topRatedBtn" value="Top Rated" class="headerBtn">
+          Top Rated
+        </button>
+        <button id="popularBtn" value="Popular" class="headerBtn">
+          Popular
+        </button>
+        <button id="upcomingBtn" value="Upcoming" class="headerBtn">
+          Upcoming
+        </button>
+      </div>
 
+      <form action="#" method="GET" class="searchForm">
+        <label for="searchInput" class="sr-only">Enter a movie name:</label>
+        <input type="text" id="searchInput" name="searchInput" class="searchInput"
+          placeholder="Enter a movie name..." />
+        <button type="submit" id="searchBtn" class="searchBtn">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+
+      <h2>What genre are you in the mood for?</h2>
+
+      <p>
+        Choose a genre from the
+        <span class="headerSpan"> <em>dropdown</em></span> below!
+      </p>
+
+      <form action="" name="genreForm" id="genreForm" class="genreForm">
+        <label for="genreSelect" class="sr-only">Select a genre from the dropdown:</label>
+        <select name="genreSelect" id="genreSelect" class="genreSelect">
+          <option class="defaultOption" disabled>Select a genre</option>
+        </select>
+      </form>
+    </div>
+  </header>
+
+  <main id="mainContent" class="mainContent">
+    <section class="wrapper">
+      <h2 id="genreTitle" class="genreTitle">Trending</h2>
+      <ul id="moviesGrid" class="moviesGrid"></ul>
+      
       <!-- Modal HTML structure -->
       <div id="myModal" class="modal">
         <div class="modalContentContainer">
