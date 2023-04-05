@@ -1,16 +1,17 @@
 footer {
-  background-color: #f8f8f8;
+  background-color: $quinary;
   padding: 10px;
   text-align: center;
 }
 
 .footerContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-}
 
-.footerContent {
+  & .copyright {
+    margin-left: 6rem;
+  }
 
   & span {
     font-weight: bold;
