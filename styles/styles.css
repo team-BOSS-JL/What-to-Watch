@@ -443,7 +443,7 @@ img {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 40vh;
+  height: 68vh;
   background-color: #f5f5f5;
   color: #222;
   padding: 13rem 0;
@@ -762,9 +762,6 @@ footer {
   }
 }
 @media screen and (max-width: 535px) {
-  .mainHeader {
-    height: 55vh;
-  }
   .mainHeader h1 {
     margin-top: 1rem;
     font-size: 52px;
@@ -783,6 +780,9 @@ footer {
   }
 }
 @media screen and (max-width: 454px) {
+  .mainHeader {
+    padding: 12rem 0;
+  }
   .buttonsContainer {
     width: 100%;
   }
