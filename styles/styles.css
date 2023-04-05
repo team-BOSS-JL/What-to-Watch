@@ -678,14 +678,14 @@ footer {
   bottom: 0;
   right: 0;
   padding: 20px 30px;
-  background-color: #bf6c6c;
+  background-color: rgba(54, 75, 89, 0.8549019608);
   border: none;
   border-radius: 80px 0 0 0;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
 .goTopBtn:hover {
-  background-color: rgba(54, 75, 89, 0.8549019608);
+  background-color: #bf6c6c;
 }
 
 @-webkit-keyframes bounce {

@@ -4,12 +4,12 @@
   bottom: 0;
   right: 0;
   padding: 20px 30px;
-  background-color: $quaternary;
+  background-color: $secondary;
   border: none;
   border-radius: 80px 0 0 0;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: $secondary;
+    background-color: $quaternary;
   }
 }
