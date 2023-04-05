@@ -6,11 +6,12 @@ footer {
 
 .footerContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-}
 
-.footerContent {
+  & .copyright {
+    margin-left: 6rem;
+  }
 
   & span {
     font-weight: bold;
