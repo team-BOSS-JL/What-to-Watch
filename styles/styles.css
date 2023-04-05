@@ -600,7 +600,7 @@ img {
 
 footer {
   background-color: #e8e8e8;
-  padding: 10px;
+  padding: 0.5rem;
   text-align: center;
 }
 
@@ -729,6 +729,16 @@ footer {
           animation-iteration-count: infinite;
 }
 
+@media screen and (max-width: 412px) and (max-height: 915px) {
+  .mainHeader {
+    height: 80vh;
+  }
+}
+@media screen and (max-height: 844px) {
+  .mainHeader {
+    height: 93vh;
+  }
+}
 @media screen and (max-width: 768px) {
   .modalContentContainer {
     max-width: 90%;
