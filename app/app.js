@@ -152,7 +152,7 @@ const movieApp = {
       .then((data) => {
         const genres = data.genres;
         genres.forEach((genre) => {
-          // Create a new option element for each genre
+          // A document fragment is created to hold all the movie cards before they are added to the webpage.
           const option = document.createElement("option");
           // Set the option's value property to the genre's ID and its text property to the genre's name
           option.value = genre.name;
@@ -191,6 +191,7 @@ const movieApp = {
       .then((response) => response.json())
       .then((data) => {
         const movies = data.results;
+        // A document fragment is created to hold all the movie cards before they are added to the webpage.
         const moviesFragment = document.createDocumentFragment();
         movies.forEach((movie) => {
           const movieCard = this.createMovieCard(movie);
