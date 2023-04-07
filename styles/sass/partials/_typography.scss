@@ -129,3 +129,15 @@ h2 {
     cursor: pointer;
   }
 }
+
+// ==== Footer Typography ====
+
+.juno {
+  color: $quaternary;
+  text-decoration: none;
+  transition: .3s ease-in;
+
+  &:hover {
+    color: $secondary;
+  }
+}

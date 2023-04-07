@@ -407,6 +407,16 @@ h2 {
   cursor: pointer;
 }
 
+.juno {
+  color: #bf6c6c;
+  text-decoration: none;
+  -webkit-transition: 0.3s ease-in;
+  transition: 0.3s ease-in;
+}
+.juno:hover {
+  color: rgba(54, 75, 89, 0.8549019608);
+}
+
 .wrapper {
   max-width: 1300px;
   width: 90%;
@@ -622,6 +632,10 @@ footer {
   font-weight: bold;
   font-style: italic;
   margin-right: 0.1rem;
+}
+
+.juno {
+  margin-left: 0.5rem;
 }
 
 .modal {
